@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "generalSans-bold";
+  src: url("../fonts/GeneralSans-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "generalSans-medium";
+  src: url("../fonts/GeneralSans-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "generalSans-regular";
+  src: url("../fonts/GeneralSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "cabinetgrotesk";
+  src: url("../fonts/CabinetGrotesk-Variable.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "futura";
+  src: url("../fonts/Futura-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "haasmedium";
+  src: url("../fonts/NeueHaasDisplayMediu.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "haasbold";
+  src: url("../fonts/NeueHaasDisplayBold.ttf") format("truetype");
+}
+
+@theme {
+  --font-gsbold: generalSans-bold, "sans";
+  --font-gsmedium: generalSans-medium, "sans";
+  --font-gsregular: generalSans-regular, "sans";
+  --font-cabinet: cabinetgrotesk, "sans";
+  --font-futura: futura, "sans";
+  --font-haasmedium: haasmedium, "sans";
+  --font-haasbold: haasbold, "sans";
+}
+
+body {
+  background-color: #000000;
+  color: #dddddd;
+}
