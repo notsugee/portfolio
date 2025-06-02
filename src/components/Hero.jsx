@@ -2,18 +2,44 @@ import { useRef } from "react";
 import { useParallax } from "../hooks/useParallax";
 import gsap from "gsap";
 
-const Hero = () => {
+const Hero = ({ onAboutClick }) => {
   const vidRef = useRef(null);
   const bigtextRef = useRef(null);
   const historyRef = useRef(null);
   const plusRef = useRef(null);
   const arrowRef = useRef(null);
   const arrowTextRef = useRef(null);
+  const locArrowRef = useRef(null);
 
   useParallax(bigtextRef, -100);
   useParallax(vidRef, -100);
   useParallax(historyRef, -50);
   useParallax(plusRef, -1000);
+  useParallax(locArrowRef, -60);
+
+  const underlineRefs = useRef([]);
+
+  const addToRefs = (el) => {
+    if (el && !underlineRefs.current.includes(el)) {
+      underlineRefs.current.push(el);
+    }
+  };
+
+  const animateUnderlineIn = (index) => {
+    gsap.to(underlineRefs.current[index], {
+      scaleX: 1,
+      duration: 0.4,
+      ease: "power3.out",
+    });
+  };
+
+  const animateUnderlineOut = (index) => {
+    gsap.to(underlineRefs.current[index], {
+      scaleX: 0,
+      duration: 0.4,
+      ease: "power3.in",
+    });
+  };
 
   const handleMouseEnter = () => {
     gsap.fromTo(
@@ -56,6 +82,7 @@ const Hero = () => {
           loop
           muted
           src="/media/video.mp4"
+          onContextMenu={(e) => e.preventDefault()}
           className="scale-x-[-1] object-cover rounded-full w-full h-full transform translate-y-67"
         ></video>
       </div>
@@ -185,17 +212,26 @@ const Hero = () => {
       <div className="absolute right-0 h-full w-[33vw] p-4">
         <nav className="flex flex-row justify-between pt-17 pr-12">
           <div className="flex flex-col">
-            <a href="#" className="font-gsmedium text-lg">
+            <a href="#" className="relative font-gsmedium text-lg group">
               Main
+              <span className="absolute left-0 -bottom-0.5 h-0.5 w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
             </a>
-            <a href="#" className="font-gsmedium text-lg">
-              Projects
-            </a>
-            <a href="#" className="font-gsmedium text-lg">
+            <a
+              onClick={onAboutClick}
+              href="#"
+              className="relative font-gsmedium text-lg group"
+            >
               About
+              <span className="absolute left-0 -bottom-0.5 h-0.5 w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
             </a>
-            <a href="#" className="font-gsmedium text-lg">
+            <a href="#" className="relative font-gsmedium text-lg group">
+              Projects
+              <span className="absolute left-0 -bottom-0.5 h-0.5 w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
+            </a>
+
+            <a href="#" className="relative font-gsmedium text-lg group">
               Contact
+              <span className="absolute left-0 -bottom-0.5 h-0.5 w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
             </a>
           </div>
           <div>
@@ -209,7 +245,10 @@ const Hero = () => {
             frontend <span>&mdash;</span> backend
           </h2>
         </div>
-        <div className="flex items-center justify-between absolute bottom-0 mb-30 w-md pr-4">
+        <div
+          ref={locArrowRef}
+          className="flex items-center justify-between absolute bottom-0 mb-30 w-md pr-4"
+        >
           <div>
             <p className="font-gsmedium text-lg leading-6">
               Chennai,
